@@ -24,7 +24,6 @@ export default class FeaturedImageButton extends Component  {
         fetch(app.forum.attribute('apiUrl')  + "/featured-image/upload", {
             method: "POST",
             body: formData,
-            credentials: "same-origin"
         })
 
         .then(response => response.json())
