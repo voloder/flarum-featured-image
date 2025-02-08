@@ -21,7 +21,8 @@ export default class FeaturedImageButton extends Component  {
 
         formData.append("featuredImage", this.$('input').prop('files')[0]);
 
-        fetch(app.forum.attribute('apiUrl')  + "/featured-image/upload", {
+        app.request({
+            url: app.forum.attribute('apiUrl')  + "/featured-image/upload",
             method: "POST",
             serialize: (raw) => raw,
             body: formData,
