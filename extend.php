@@ -26,6 +26,6 @@ return [
 
     (new Extend\ApiSerializer(UserSerializer::class))
         ->attribute('featuredImage', function ($serializer, $user, $attributes) {
-            return $user->featuredImage;
+            return $user->featured_image;
         })
 ];

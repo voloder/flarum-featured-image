@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Log;
 
 class SaveFeaturedImage
 {
-
     public function handle(Saving $event)
     {
         try {
@@ -15,7 +14,7 @@ class SaveFeaturedImage
             $data = $event->data;
 
             if (isset($data["attributes"]["featuredImage"])) {
-                $user->featuredImage = $data["attributes"]["featuredImage"];
+                $user->featured_image = $data["attributes"]["featuredImage"];
                 $user->save();
             }
         } catch (\Exception $e) {
