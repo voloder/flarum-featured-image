@@ -19,8 +19,7 @@ class SaveFeaturedImage
                 $user->save();
             }
         } catch (\Exception $e) {
-            Log::error('Error in SaveFeaturedImage: ' . $e->getMessage());
-
+            error_log('Error in SaveFeaturedImage: ' . $e->getMessage());
             throw $e;
         }
 
