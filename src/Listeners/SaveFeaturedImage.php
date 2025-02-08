@@ -1,6 +1,6 @@
 <?php
 
-namespace Voloder\FlarumFeaturedImage\Event;
+namespace Voloder\FlarumFeaturedImage\Listeners;
 
 use Flarum\User\Event\Saving;
 

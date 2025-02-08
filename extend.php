@@ -2,11 +2,13 @@
 
 namespace FlarumExt\FeaturedImage;
 
+use Flarum\Api\Serializer\UserSerializer;
 use Flarum\Extend;
 use Flarum\User\Event\Saving;
 use Flarum\User\User;
 use Voloder\FlarumFeaturedImage\Api\Controllers\FeaturedImageController;
-use Voloder\FlarumFeaturedImage\Event\SaveFeaturedImage;
+use Voloder\FlarumFeaturedImage\Listeners\AddFeaturedImageAttribute;
+use Voloder\FlarumFeaturedImage\Listeners\SaveFeaturedImage;
 
 return [
     (new Extend\Frontend("forum"))
@@ -21,4 +23,7 @@ return [
 
     (new Extend\Model(User::class))
         ->cast('featuredImage', 'string'),
+
+    (new Extend\ApiSerializer(UserSerializer::class))
+        ->attributes(AddFeaturedImageAttribute::class),
 ];
