@@ -9,11 +9,12 @@ app.initializers.add("flarum-featured-image", () => {
     User.prototype.featuredImage = Model.attribute('featuredImage');
 
     extend(UserCard.prototype, 'view', function(vnode) {
+        console.log(vnode);
         const user = this.attrs.user;
         if(!user.featuredImage) {
             return;
         }
-        vnode.dom.style.backgroundImage = `url(${user.featuredImage})`;
+        vnode.style.backgroundImage = `url(${user.featuredImage})`;
     });
     extend(UserCard.prototype, "infoItems", function (items) {
         items.add("add-featured-image", <FeaturedImageButton> </FeaturedImageButton>, -100);
