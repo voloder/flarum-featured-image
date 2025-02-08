@@ -17,6 +17,8 @@ export default class FeaturedImageButton extends Component  {
     }
 
     uploadImage() {
+        const user = this.attrs.user;
+
         let formData = new FormData();
 
         formData.append("featuredImage", this.$('input').prop('files')[0]);
@@ -26,7 +28,7 @@ export default class FeaturedImageButton extends Component  {
             method: "POST",
             body: formData,
         }).then((result) => {
-            this.attrs.user.save({featuredImage: result.data[0].attributes.url }).then(() => {
+            user.save({featuredImage: result.data[0].attributes.url }).then(() => {
                 m.redraw();
             });
         });
