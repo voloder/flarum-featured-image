@@ -16,6 +16,7 @@ class SaveFeaturedImage
 
             if (isset($data["attributes"]["featuredImage"])) {
                 $user->featuredImage = $data["attributes"]["featuredImage"];
+                $user->save();
             }
         } catch (\Exception $e) {
             Log::error('Error in SaveFeaturedImage: ' . $e->getMessage());

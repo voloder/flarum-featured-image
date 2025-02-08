@@ -3,20 +3,13 @@
 namespace Voloder\FlarumFeaturedImage\Listeners;
 
 use Flarum\Api\Serializer\UserSerializer;
-use Flarum\User\User;
+use Flarum\Settings\Event\Serializing;
 
 class AddFeaturedImageAttribute
 {
-    /**
-     * @param UserSerializer $serializer
-     * @param User $user
-     * @param array $attributes
-     *
-     * @return array
-     */
-    public function __invoke(UserSerializer $serializer, User $user, array $attributes): array
-    {
-        $attributes["featuredImage"] = $user->featuredImage ?? null;
-        return $attributes;
+    public function handle(Serializing $event) {
+        if ($event->isSerializer(UserSerializer::class)) {
+            $event->attributes['featuredImage'] = $event->model->featuredImage;
+        }
     }
 }
