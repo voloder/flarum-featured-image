@@ -7,6 +7,8 @@ import Model from 'flarum/common/Model';
 import FeaturedImageButton from "./components/FeaturedImageButton";
 app.initializers.add("flarum-featured-image", () => {
     extend(UserCard.prototype, 'view', function(vnode) {
+        console.log(vnode);
+
         const user = this.attrs.user;
 
         console.log(user);
