@@ -9,5 +9,5 @@ return [
         ->js(__DIR__ . "/js/dist/forum.js"),
 
     (new Extend\Routes('api'))
-        ->post('/featured-image/upload', 'fof-upload.upload', FeaturedImageController::class)
+        ->post('/featured-image/upload', 'featured-image.upload', FeaturedImageController::class)
 ];
