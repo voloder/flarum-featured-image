@@ -26,7 +26,7 @@ export default class FeaturedImageButton extends Component  {
             method: "POST",
             body: formData,
         }).then((result) => {
-            app.user.save({featuredImage: result.data[0].attributes.url }).then(() => {
+            this.attrs.user.save({featuredImage: result.data[0].attributes.url }).then(() => {
                 m.redraw();
             });
         });
