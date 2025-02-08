@@ -14,7 +14,7 @@ app.initializers.add("flarum-featured-image", () => {
         if(!user.featuredImage) {
             return;
         }
-        vnode.style.backgroundImage = `url(${user.featuredImage})`;
+        vnode.attrs.style.backgroundImage = `url(${user.featuredImage})`;
     });
     extend(UserCard.prototype, "infoItems", function (items) {
         items.add("add-featured-image", <FeaturedImageButton> </FeaturedImageButton>, -100);
