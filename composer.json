@@ -1,5 +1,5 @@
 {
-    "name": "ado/flarum-featured-image",
+    "name": "voloder/flarum-featured-image",
     "autoload": {
         "psr-4": {
             "Ado\\FlarumFeaturedImage\\": "src/"
