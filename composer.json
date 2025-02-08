@@ -1,0 +1,17 @@
+{
+    "name": "ado/flarum-featured-image",
+    "autoload": {
+        "psr-4": {
+            "Ado\\FlarumFeaturedImage\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "voloder",
+            "email": "110066198+voloder@users.noreply.github.com"
+        }
+    ],
+    "require-dev": {
+        "flarum/core": "^1.8"
+    }
+}
