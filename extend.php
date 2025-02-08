@@ -27,5 +27,7 @@ return [
     (new Extend\ApiSerializer(UserSerializer::class))
         ->attribute('featuredImage', function ($serializer, $user, $attributes) {
             return $user->featured_image;
-        })
+        }),
+
+    (new Extend\Locales(__DIR__ . '/locale'))
 ];
