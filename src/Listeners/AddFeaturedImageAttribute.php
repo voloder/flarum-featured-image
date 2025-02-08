@@ -16,7 +16,7 @@ class AddFeaturedImageAttribute
      */
     public function __invoke(UserSerializer $serializer, User $user, array $attributes): array
     {
-        $attributes["featuredImage"] = $user->featuredImage;
+        $attributes["featuredImage"] = $user->featuredImage ?? null;
         return $attributes;
     }
 }
