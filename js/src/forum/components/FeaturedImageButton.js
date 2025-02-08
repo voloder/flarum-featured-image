@@ -19,7 +19,7 @@ export default class FeaturedImageButton extends Component  {
     uploadImage() {
         let formData = new FormData();
 
-        formData.append("files[]", this.$('input').prop('files')[0]);
+        formData.append("featuredImage", this.$('input').prop('files')[0]);
 
         app.request({
             url: app.forum.attribute('apiUrl')  + "/featured-image/upload",
