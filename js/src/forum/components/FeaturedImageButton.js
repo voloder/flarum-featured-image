@@ -6,7 +6,7 @@ export default class FeaturedImageButton extends Component  {
         return (
             <button className="Button" type="button" name="add-featured-image" onclick={this.uploadButtonClicked.bind(this)}>
                 <span className="Button-label">Select Featured Image...</span>
-                <form>
+                <form style="display: none;">
                     <input type="file" multiple={false} onchange={this.uploadImage.bind(this)}/>
                 </form>
             </button>
