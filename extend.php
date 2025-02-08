@@ -25,5 +25,7 @@ return [
         ->cast('featuredImage', 'string'),
 
     (new Extend\ApiSerializer(UserSerializer::class))
-        ->attributes(AddFeaturedImageAttribute::class),
+        ->attribute('featuredImage', function ($serializer, $user, $attributes) {
+            return $user->featuredImage;
+        })
 ];
