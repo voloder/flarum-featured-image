@@ -2,12 +2,12 @@
 namespace FlarumExt\FeaturedImage;
 
 use Flarum\Extend;
-use Flarum\User\User;
+use Voloder\FlarumFeaturedImage\Api\Controllers\FeaturedImageController;
 
 return [
     (new Extend\Frontend("forum"))
         ->js(__DIR__ . "/js/dist/forum.js"),
 
-    (new Extend\ApiController())
-        ->addInclude(['upload-image']),
+    (new Extend\Routes('api'))
+        ->post('/featured-image/upload', 'fof-upload.upload', FeaturedImageController::class)
 ];
