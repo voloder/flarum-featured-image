@@ -5,17 +5,15 @@ use Illuminate\Database\Schema\Builder;
 
 return [
     'up' => function (Builder $schema) {
-        if ($schema->hasTable('users')) {
-            $schema->table('users', function (Blueprint $table) {
+        if (!$schema->hasColumn('users', 'web3address')) {
+            $schema->table('users', function (Blueprint $table) use ($schema) {
                 $table->string('featuredImage')->nullable();
             });
         }
     },
     'down' => function (Builder $schema) {
-        if ($schema->hasTable('users')) {
-            $schema->table('users', function (Blueprint $table) {
-                $table->dropColumn('featuredImage');
-            });
-        }
+        $schema->table('users', function (Blueprint $table) use ($schema) {
+            $table->dropColumn('featuredImage');
+        });
     }
 ];
