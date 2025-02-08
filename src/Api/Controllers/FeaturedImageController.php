@@ -26,10 +26,7 @@ class FeaturedImageController extends UploadController
     protected function data(ServerRequestInterface $request, Document $document): \Illuminate\Support\Collection
     {
         try {
-            $actor = RequestUtil::getActor($request);
-
             $file = $request->getUploadedFiles()["featuredImage"];
-
             $extension = pathinfo($file->getClientFilename(), PATHINFO_EXTENSION);
 
             if ($extension !== "jpg" && $extension !== "jpeg" && $extension !== "png" && $extension !== "gif") {
@@ -37,12 +34,7 @@ class FeaturedImageController extends UploadController
             }
 
             $request = $request->withUploadedFiles(["files" => [$file]]);
-
-            $response = parent::data($request, $document);
-
-            $actor->featuredImage = $response->first()->url;
-
-            return $response;
+            return parent::data($request, $document);
         } catch (\Exception $e) {
             Log::error('Error in FeaturedImageController: ' . $e->getMessage());
             throw $e;

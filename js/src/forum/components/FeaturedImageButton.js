@@ -24,10 +24,11 @@ export default class FeaturedImageButton extends Component  {
         app.request({
             url: app.forum.attribute('apiUrl')  + "/featured-image/upload",
             method: "POST",
-            serialize: (raw) => raw,
             body: formData,
-        })
-
-        .then(response => response.json())
+        }).then((result) => {
+            app.user.save({featuredImage: result.data[0].attributes.url }).then(() => {
+                m.redraw();
+            });
+        });
     }
 }
