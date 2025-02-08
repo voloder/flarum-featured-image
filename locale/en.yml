@@ -1,5 +1,5 @@
 flarum-featured-image:
   forum:
     featured_image:
-      add: "Add featured image"
-      remove: "Remove featured image"
+      add: "Upload featured image"
+      remove: "Clear featured image"
