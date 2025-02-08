@@ -1,4 +1,5 @@
 <?php
+
 namespace Voloder\FlarumFeaturedImage\Api\Controllers;
 
 
@@ -6,12 +7,14 @@ use Flarum\Http\RequestUtil;
 use Flarum\Settings\SettingsRepositoryInterface;
 use FoF\Upload\Api\Controllers\UploadController;
 use FoF\Upload\Exceptions\InvalidUploadException;
+use Illuminate\Support\Facades\Log;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\UploadedFileInterface;
 use Tobscure\JsonApi\Document;
 
 
-class FeaturedImageController extends UploadController {
+class FeaturedImageController extends UploadController
+{
     /**
      * @var SettingsRepositoryInterface
      */
@@ -22,23 +25,27 @@ class FeaturedImageController extends UploadController {
      */
     protected function data(ServerRequestInterface $request, Document $document): \Illuminate\Support\Collection
     {
-        $actor = RequestUtil::getActor($request);
+        try {
+            $actor = RequestUtil::getActor($request);
 
-        $files = $request->getUploadedFiles();
+            $file = $request->getUploadedFiles()["featuredImage"];
 
-        $file = $files["featuredImage"];
-        $extension = pathinfo($file->getClientFilename(), PATHINFO_EXTENSION);
+            $extension = pathinfo($file->getClientFilename(), PATHINFO_EXTENSION);
 
-        if($extension !== "jpg" && $extension !== "jpeg" && $extension !== "png" && $extension !== "gif") {
-            throw new InvalidUploadException("Invalid file type", 400);
+            if ($extension !== "jpg" && $extension !== "jpeg" && $extension !== "png" && $extension !== "gif") {
+                throw new InvalidUploadException("Invalid file type", 400);
+            }
+
+            $request = $request->withUploadedFiles(["files" => [$file]]);
+
+            $response = parent::data($request, $document);
+
+            $actor->featuredImage = $response->first()->url;
+
+            return $response;
+        } catch (\Exception $e) {
+            Log::error('Error in FeaturedImageController: ' . $e->getMessage());
+            throw $e;
         }
-
-        $request = $request->withUploadedFiles(["files" => $file]);
-
-        $response = parent::data($request, $document);
-
-        $actor->featuredImage = $response->first()->url;
-
-        return $response;
     }
 }
