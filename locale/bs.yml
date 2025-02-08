@@ -1,0 +1,5 @@
+flarum-featured-image:
+  forum:
+    featured_image:
+      add: "Dodaj naslovnu sliku"
+      remove: "Ukloni naslovnu sliku"

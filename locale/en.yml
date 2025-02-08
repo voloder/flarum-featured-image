@@ -1,0 +1,5 @@
+flarum-featured-image:
+  forum:
+    featured_image:
+      add: "Add featured image"
+      remove: "Remove featured image"
