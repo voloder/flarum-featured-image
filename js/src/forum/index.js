@@ -10,7 +10,7 @@ app.initializers.add("flarum-featured-image", () => {
 
     extend(UserCard.prototype, "view", function(vnode) {
         const user = this.attrs.user;
-        if(!user.featuredImage) {
+        if(!user.featuredImage()) {
             return;
         }
         vnode.attrs.style = `background-image: url(${user.featuredImage()});`;
