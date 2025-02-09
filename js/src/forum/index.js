@@ -18,7 +18,7 @@ app.initializers.add("flarum-featured-image", () => {
     extend(UserCard.prototype, "infoItems", function (items) {
         const user = this.attrs.user;
 
-        if(app.session == null || user.data.id !== app.session.user.data.id) {
+        if(app.session.user == null || user.data.id !== app.session.user.data.id) {
             return;
         }
 
