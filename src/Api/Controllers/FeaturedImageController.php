@@ -59,7 +59,16 @@ class FeaturedImageController extends UploadController
         elseif ($info['mime'] == 'image/webp')
             $image = imagecreatefromwebp($source);
 
-        imagejpeg($image, $destination, $quality);
+        list($width, $height) = getimagesize($image);
+        $r = $width / $height;
+
+        if($width > 800) {
+            $width = 800;
+            $height = 800 / $r;
+        }
+
+        imagecopyresampled($image, $image, 0, 0, 0, 0, $width, $height, $info[0], $info[1]);
+        imagewebp($image, $destination, $quality);
 
         return $destination;
     }
