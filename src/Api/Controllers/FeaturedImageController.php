@@ -33,7 +33,7 @@ class FeaturedImageController extends UploadController
                 throw new InvalidUploadException("Invalid file type", 400);
             }
 
-            $this->compress($file->getStream()->getMetadata("uri"), $file->getStream()->getMetadata("uri"), 50);
+            $this->compress($file->getStream()->getMetadata("uri"), $file->getStream()->getMetadata("uri"), 75);
 
             $request = $request->withUploadedFiles(["files" => [$file]]);
             return parent::data($request, $document);
@@ -62,9 +62,9 @@ class FeaturedImageController extends UploadController
         list($width, $height) = getimagesize($source);
         $r = $width / $height;
 
-        if($width > 800) {
-            $width = 800;
-            $height = 800 / $r;
+        if($width > 1080) {
+            $width = 1080;
+            $height = 1080 / $r;
         }
         $resized = imagecreatetruecolor($width, $height);
         imagecopyresampled($resized, $image, 0, 0, 0, 0, $width, $height, $info[0], $info[1]);
