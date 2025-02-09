@@ -38,7 +38,7 @@ class FeaturedImageController extends UploadController
             $request = $request->withUploadedFiles(["files" => [$file]]);
             return parent::data($request, $document);
         } catch (\Exception $e) {
-            Log::error('Error in FeaturedImageController: ' . $e->getMessage());
+            error_log('Error in FeaturedImageController: ' . $e->getMessage());
             throw $e;
         }
     }
