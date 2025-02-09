@@ -67,7 +67,7 @@ class FeaturedImageController extends UploadController
             $height = 800 / $r;
         }
 
-        imagecopyresampled($image, $image, 0, 0, 0, 0, $width, $height, $info[0], $info[1]);
+        //imagecopyresampled($image, $image, 0, 0, 0, 0, $width, $height, $info[0], $info[1]);
         imagewebp($image, $destination, $quality);
 
         return $destination;
