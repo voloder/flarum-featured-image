@@ -17,6 +17,11 @@ app.initializers.add("flarum-featured-image", () => {
     });
     extend(UserCard.prototype, "infoItems", function (items) {
         const user = this.attrs.user;
+
+        if(user.id !== app.user.id) {
+            return;
+        }
+
         items.add('add-featured-image', <FeaturedImageButton user={user}> </FeaturedImageButton>, -100);
     });
 });

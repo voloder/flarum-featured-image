@@ -12,6 +12,11 @@ class SaveFeaturedImage
         try {
             $user = $event->user;
             $data = $event->data;
+            $actor = $event->actor;
+
+            if($actor->id !== $user->id) {
+                return;
+            }
 
             if (isset($data["attributes"]["featuredImage"])) {
                 $user->featured_image = $data["attributes"]["featuredImage"];
