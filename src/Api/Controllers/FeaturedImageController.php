@@ -29,9 +29,11 @@ class FeaturedImageController extends UploadController
             $file = $request->getUploadedFiles()["featuredImage"];
             $extension = pathinfo($file->getClientFilename(), PATHINFO_EXTENSION);
 
-            if ($extension !== "jpg" && $extension !== "jpeg" && $extension !== "png" && $extension !== "gif") {
+            if ($extension !== "jpg" && $extension !== "jpeg" && $extension !== "png" && $extension !== "webp" && $extension !== "gif") {
                 throw new InvalidUploadException("Invalid file type", 400);
             }
+
+            $this->compress($file->getStream()->getMetadata("uri"), $file->getStream()->getMetadata("uri"), 50);
 
             $request = $request->withUploadedFiles(["files" => [$file]]);
             return parent::data($request, $document);
@@ -39,5 +41,26 @@ class FeaturedImageController extends UploadController
             Log::error('Error in FeaturedImageController: ' . $e->getMessage());
             throw $e;
         }
+    }
+
+    function compress($source, $destination, $quality) {
+
+        $info = getimagesize($source);
+
+        if ($info['mime'] == 'image/jpeg')
+            $image = imagecreatefromjpeg($source);
+
+        elseif ($info['mime'] == 'image/gif')
+            $image = imagecreatefromgif($source);
+
+        elseif ($info['mime'] == 'image/png')
+            $image = imagecreatefrompng($source);
+
+        elseif ($info['mime'] == 'image/webp')
+            $image = imagecreatefromwebp($source);
+
+        imagejpeg($image, $destination, $quality);
+
+        return $destination;
     }
 }
