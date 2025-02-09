@@ -18,7 +18,7 @@ class SaveFeaturedImage
                 return;
             }
 
-            if (isset($data["attributes"]["featuredImage"])) {
+            if (array_key_exists("featuredImage", $data["attributes"])) {
                 $user->featured_image = $data["attributes"]["featuredImage"];
             } else {
                 $user->featured_image = $user->featured_image ?? null;
